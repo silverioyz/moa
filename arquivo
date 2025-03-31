@@ -1,0 +1,61 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Select, SelectItem } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+
+export default function AgricolaApp() {
+  const culturas = ["Soja", "Milho", "Trigo", "Cana-de-açúcar", "Café"];
+  const fases = ["Plantio", "Pulverização", "Irrigação", "Fertilização", "Colheita"];
+
+  const [culturaSelecionada, setCulturaSelecionada] = useState("");
+  const [faseSelecionada, setFaseSelecionada] = useState("");
+
+  return (
+    <div className="p-6 space-y-6 bg-gray-100 min-h-screen">
+      <header className="text-center text-4xl font-bold text-green-700 py-6 bg-white shadow-md">Revolução no Mercado Agrícola</header>
+      <nav className="flex justify-center space-x-4 bg-white py-4 shadow-md">
+        <Button variant="outline">Vender</Button>
+        <Button variant="outline">Cooperativas</Button>
+        <Button variant="outline">Comprar</Button>
+      </nav>
+
+      <section className="space-y-4 max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold text-gray-700">Contratar Serviço</h2>
+        <Select onValueChange={setCulturaSelecionada}>
+          <SelectItem value="">Selecione a cultura</SelectItem>
+          {culturas.map((cultura) => (
+            <SelectItem key={cultura} value={cultura}>{cultura}</SelectItem>
+          ))}
+        </Select>
+        
+        <Select onValueChange={setFaseSelecionada}>
+          <SelectItem value="">Selecione a fase</SelectItem>
+          {fases.map((fase) => (
+            <SelectItem key={fase} value={fase}>{fase}</SelectItem>
+          ))}
+        </Select>
+
+        <Button className="w-full bg-green-600 text-white">Buscar Profissionais</Button>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <Card className="shadow-lg">
+          <CardContent>
+            <img src="/images/trator.jpg" alt="Tratorista" className="rounded-xl w-full h-48 object-cover" />
+            <p className="text-center mt-2 text-gray-700 font-medium">Ofereça seus serviços</p>
+            <Button className="w-full mt-2 bg-green-700 text-white">Anunciar</Button>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-lg">
+          <CardContent>
+            <img src="/images/defensivos.jpg" alt="Defensivos Agrícolas" className="rounded-xl w-full h-48 object-cover" />
+            <p className="text-center mt-2 text-gray-700 font-medium">Compre insumos e defensivos</p>
+            <Button className="w-full mt-2 bg-green-700 text-white">Acessar</Button>
+          </CardContent>
+        </Card>
+      </section>
+    </div>
+  );
+}
